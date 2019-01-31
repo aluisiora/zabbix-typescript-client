@@ -1,0 +1,21 @@
+{
+    "name": "zabbix-js-client",
+    "version": "0.0.1",
+    "description": "Zabbix Javascript Rest API Client",
+    "main": "dist/index",
+    "scripts": {
+        "test": "jest"
+    },
+    "publishConfig": {
+        "registry": "https://nexusoss.3db.net.br/repository/npm-private/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@gogs.3db.net.br:3DB/zabbix-js-client.git"
+    },
+    "keywords": [
+        "zabbix"
+    ],
+    "author": "Aluisio R. Amaral",
+    "license": "UNLICENCED"
+}
