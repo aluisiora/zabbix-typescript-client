@@ -7,6 +7,7 @@ import { ITemplateMassaddParams } from './ITemplateMassaddParams';
 import { ITemplateMassremoveParams } from './ITemplateMassremoveParams';
 import { ITemplateMassupdateParams } from './ITemplateMassupdateParams';
 import { ITemplateUpdateParams } from './ITemplateUpdateParams';
+import { ITemplate } from './ITemplate';
 
 export class Template extends ZabbixCommunicator {
     constructor(socket: ZabbixSocket) {
@@ -14,7 +15,7 @@ export class Template extends ZabbixCommunicator {
         this.method = 'template.';
     }
 
-    public async get(params?: ITemplateGetParams): Promise<ITemplateResponse[]> {
+    public async get(params?: ITemplateGetParams): Promise<ITemplate[]> {
         return await this.call('get', params);
     }
 

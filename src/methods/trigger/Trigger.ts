@@ -5,6 +5,7 @@ import { ITriggerResponse } from './ITriggerResponse';
 import { ITriggerCreateParams } from './ITriggerCreateParams';
 import { ITriggerGetParams } from './ITriggerGetParams';
 import { ITriggerUpdateParams } from './ITriggerUpdateParams';
+import { ITrigger } from './ITrigger';
 
 export class Trigger extends ZabbixCommunicator {
     constructor(socket: ZabbixSocket) {
@@ -12,7 +13,7 @@ export class Trigger extends ZabbixCommunicator {
         this.method = 'trigger.';
     }
 
-    public async get(params?: ITriggerGetParams): Promise<ITriggerResponse[]> {
+    public async get(params?: ITriggerGetParams): Promise<ITrigger[]> {
         return await this.call('get', params);
     }
 

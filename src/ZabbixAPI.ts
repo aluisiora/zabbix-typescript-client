@@ -4,6 +4,7 @@ import { User } from './methods/user/User';
 import { Item } from './methods/item/Item';
 import { Trigger } from 'methods/trigger/Trigger';
 import { Template } from 'methods/template/Template';
+import { History } from 'methods/history/History';
 
 export class ZabbixAPI {
     private socket: ZabbixSocket;
@@ -30,5 +31,9 @@ export class ZabbixAPI {
 
     public template(): Template {
         return new Template(this.socket);
+    }
+
+    public history(): History {
+        return new History(this.socket);
     }
 }

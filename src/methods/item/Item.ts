@@ -4,6 +4,7 @@ import { IItemCreateParams } from './IItemCreateParams';
 import { IItemResponse } from './IItemResponse';
 import { IItemGetParams } from './IItemGetParams';
 import { IItemUpdateParams } from './IItemUpdateParams';
+import { IItem } from './IItem';
 
 export class Item extends ZabbixCommunicator {
     constructor(socket: ZabbixSocket) {
@@ -11,7 +12,7 @@ export class Item extends ZabbixCommunicator {
         this.method = 'item.';
     }
 
-    public async get(params?: IItemGetParams): Promise<IItemResponse[]> {
+    public async get(params?: IItemGetParams): Promise<IItem[]> {
         return await this.call('get', params);
     }
 
