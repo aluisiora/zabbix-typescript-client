@@ -5,6 +5,7 @@ import { Item } from './methods/item/Item';
 import { Trigger } from 'methods/trigger/Trigger';
 import { Template } from 'methods/template/Template';
 import { History } from 'methods/history/History';
+import { HostGroup } from 'methods/hostgroup/HostGroup';
 
 export class ZabbixAPI {
     private socket: ZabbixSocket;
@@ -35,5 +36,9 @@ export class ZabbixAPI {
 
     public history(): History {
         return new History(this.socket);
+    }
+
+    public hostGroup(): HostGroup {
+        return new HostGroup(this.socket);
     }
 }
