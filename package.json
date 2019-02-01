@@ -8,18 +8,17 @@
         "build": "rimraf dist && tsc",
         "watch": "rimraf dist && tsc -w"
     },
-    "publishConfig": {
-        "registry": "https://nexusoss.3db.net.br/repository/npm-private/"
-    },
     "repository": {
         "type": "git",
         "url": "git@gogs.3db.net.br:3DB/zabbix-js-client.git"
     },
     "keywords": [
-        "zabbix"
+        "zabbix",
+        "api",
+        "typescript"
     ],
     "author": "Aluisio R. Amaral",
-    "license": "UNLICENCED",
+    "license": "MIT",
     "dependencies": {
         "axios": "^0.18.0"
     },
