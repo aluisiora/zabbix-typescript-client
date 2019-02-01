@@ -1,6 +1,7 @@
 import { ZabbixSocket } from 'ZabbixSocket';
 import { Host } from './methods/host/Host';
 import { User } from './methods/user/User';
+import { Item } from './methods/item/Item';
 
 export class ZabbixAPI {
     private socket: ZabbixSocket;
@@ -10,21 +11,14 @@ export class ZabbixAPI {
     }
 
     public user(): User {
-        return this.factory<User>('user');
+        return new User(this.socket);
     }
 
-    public host() {
-        return this.factory<Host>('host');
+    public host(): Host {
+        return new Host(this.socket);
     }
 
-    private factory<T>(method: string): T {
-        switch (method) {
-            case 'host':
-                return new Host(this.socket) as any;
-            case 'user':
-                return new User(this.socket) as any;
-            default:
-                throw new Error('what?');
-        }
+    public item(): Item {
+        return new Item(this.socket);
     }
 }
