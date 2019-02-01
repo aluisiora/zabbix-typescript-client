@@ -17,5 +17,8 @@
         "zabbix"
     ],
     "author": "Aluisio R. Amaral",
-    "license": "UNLICENCED"
+    "license": "UNLICENCED",
+    "dependencies": {
+        "axios": "^0.18.0"
+    }
 }
