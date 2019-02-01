@@ -1,32 +1,16 @@
-import { AxiosInstance } from 'axios';
+import { ZabbixSocket } from 'ZabbixSocket';
 
 export abstract class ZabbixCommunicator {
-    private http: AxiosInstance = null;
-
-    private token: string = null;
+    private socket: ZabbixSocket;
 
     protected method: string = '';
 
-    constructor(http: AxiosInstance) {
-        this.http = http;
+    constructor(socket: ZabbixSocket) {
+        this.socket = socket;
     }
 
-    protected setToken(token: string) {
-        this.token = token;
-    }
-
-    protected async call(method: string, params?: any) {
-        const id = Math.random();
-
-        const data = {
-            jsonrpc: '2.0',
-            method,
-            params,
-            id,
-            auth: this.token,
-        };
-
-        const response = await this.http.post('', data);
+    protected async call(method: string, params?: any): Promise<any> {
+        const response = await this.socket.call(this.method + method, params);
         return response.data.result;
     }
 }

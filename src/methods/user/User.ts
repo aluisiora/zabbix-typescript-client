@@ -1,24 +1,22 @@
-import { ZabbixCommunicator } from 'ZabbixCommunicator';
-import { AxiosInstance } from 'axios';
+import { ZabbixCommunicator } from '../../ZabbixCommunicator';
+import { ZabbixSocket } from '../../ZabbixSocket';
 
 export class User extends ZabbixCommunicator {
-    constructor(http: AxiosInstance) {
-        super(http);
+    constructor(socket: ZabbixSocket) {
+        super(socket);
         this.method = 'user.';
     }
 
-    public async login(username: string, password: string): Promise<void> {
-        const token = await this.call(this.method + 'login', {
+    public async login(username: string, password: string): Promise<string> {
+        const token = await this.call('login', {
             user: username,
             password,
         });
-        this.setToken(token);
-        return Promise.resolve();
+        return Promise.resolve(token);
     }
 
-    public async logout(): Promise<void> {
-        const success = await this.call('user.logout');
-        if (success) this.setToken(null);
-        return Promise.resolve();
+    public async logout(): Promise<boolean> {
+        const success = await this.call('logout');
+        return Promise.resolve(success);
     }
 }

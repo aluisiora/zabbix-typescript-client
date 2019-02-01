@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { ZabbixMethod } from 'ZabbixMethod';
+import { ZabbixAPI } from './ZabbixAPI';
+import { ZabbixSocket } from './ZabbixSocket';
 
 export class ZabbixClient {
     private url: string;
@@ -8,18 +8,11 @@ export class ZabbixClient {
         this.url = url;
     }
 
-    public async login(username: string, password: string) {
-        const http = axios.create({
-            baseURL: this.url,
-            headers: {
-                Accept: 'application/json',
-            },
-        });
-
-        const zabbixMethod = new ZabbixMethod(http);
-
-        await zabbixMethod.user().login(username, password);
-
-        return zabbixMethod;
+    public async login(username: string, password: string): Promise<ZabbixAPI> {
+        const socket = new ZabbixSocket(this.url);
+        const api = new ZabbixAPI(socket);
+        const token = await api.user().login(username, password);
+        socket.setToken(token);
+        return Promise.resolve(api);
     }
 }

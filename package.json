@@ -4,7 +4,9 @@
     "description": "Zabbix Javascript Rest API Client",
     "main": "dist/index",
     "scripts": {
-        "test": "jest"
+        "test": "jest",
+        "build": "rimraf dist && tsc",
+        "watch": "rimraf dist && tsc -w"
     },
     "publishConfig": {
         "registry": "https://nexusoss.3db.net.br/repository/npm-private/"
@@ -20,5 +22,10 @@
     "license": "UNLICENCED",
     "dependencies": {
         "axios": "^0.18.0"
+    },
+    "devDependencies": {
+        "rimraf": "^2.6.3",
+        "tslint": "^5.12.1",
+        "typescript": "^3.3.1"
     }
 }

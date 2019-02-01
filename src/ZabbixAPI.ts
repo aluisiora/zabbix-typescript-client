@@ -1,12 +1,12 @@
-import { AxiosInstance } from 'axios';
+import { ZabbixSocket } from 'ZabbixSocket';
 import { Host } from './methods/host/Host';
 import { User } from './methods/user/User';
 
-export class ZabbixMethod {
-    private http: AxiosInstance;
+export class ZabbixAPI {
+    private socket: ZabbixSocket;
 
-    constructor(http: AxiosInstance) {
-        this.http = http;
+    constructor(socket: ZabbixSocket) {
+        this.socket = socket;
     }
 
     public user(): User {
@@ -20,9 +20,9 @@ export class ZabbixMethod {
     private factory<T>(method: string): T {
         switch (method) {
             case 'host':
-                return new Host(this.http) as any;
+                return new Host(this.socket) as any;
             case 'user':
-                return new User(this.http) as any;
+                return new User(this.socket) as any;
             default:
                 throw new Error('what?');
         }
