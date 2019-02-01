@@ -1,5 +1,5 @@
 {
-    "name": "zabbix-js-client",
+    "name": "zabbix-client",
     "version": "0.0.1",
     "description": "Zabbix Javascript Rest API Client",
     "main": "dist/index",
