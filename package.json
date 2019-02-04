@@ -7,7 +7,8 @@
         "build": "rimraf dist && tsc",
         "watch": "rimraf dist && tsc -w",
         "test": "NODE_ENV=testing jest",
-        "test:cov": "NODE_ENV=testing jest --coverage"
+        "test:cov": "NODE_ENV=testing jest --coverage",
+        "test:e2e": "NODE_ENV=testing jest --config ./test/jest-e2e.json"
     },
     "repository": {
         "type": "git",
@@ -24,12 +25,14 @@
         "axios": "^0.18.0"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.4",
         "@types/express": "^4.16.1",
         "@types/jest": "^23.3.13",
         "body-parser": "^1.18.3",
+        "cors": "^2.8.5",
         "express": "^4.16.4",
-        "rimraf": "^2.6.3",
         "jest": ">=22.0.0 <24.0.0",
+        "rimraf": "^2.6.3",
         "ts-jest": "^23.10.5",
         "tslint": "^5.12.1",
         "typescript": "^3.3.1"
