@@ -17,7 +17,7 @@ export class ZabbixCommunicator {
      *
      * @param params
      */
-    public async call(params?: any): Promise<any> {
+    public async call<T>(params?: any): Promise<T> {
         const response = await this.socket.call(this.method, params);
 
         if (response.data.error) {
