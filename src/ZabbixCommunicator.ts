@@ -11,6 +11,12 @@ export class ZabbixCommunicator {
         this.method = method;
     }
 
+    /**
+     * Call the zabbix backend with the params provided,
+     * must match with the method defined.
+     *
+     * @param params
+     */
     public async call(params?: any): Promise<any> {
         const response = await this.socket.call(this.method, params);
 

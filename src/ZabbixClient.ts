@@ -8,6 +8,12 @@ export class ZabbixClient {
         this.url = url;
     }
 
+    /**
+     * Login to enable further api calls
+     *
+     * @param username
+     * @param password
+     */
     public async login(username: string, password: string): Promise<ZabbixAPI> {
         const socket = new ZabbixSocket(this.url);
         const api = new ZabbixAPI(socket);

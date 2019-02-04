@@ -1,9 +1,11 @@
+import { IZabbixErrorResponse } from './IZabbixErrorResponse';
+
 export class ZabbixResponseException extends Error {
     public reason: string;
 
     public code: number;
 
-    constructor(error: any) {
+    constructor(error: IZabbixErrorResponse) {
         super(error.data);
 
         this.reason = error.message;

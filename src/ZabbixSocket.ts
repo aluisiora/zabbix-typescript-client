@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import { IZabbixResponse } from './IZabbixResponse';
 
 export class ZabbixSocket {
     private http: AxiosInstance;
@@ -18,7 +19,7 @@ export class ZabbixSocket {
         this.token = token;
     }
 
-    public async call(method: string, params?: any): Promise<AxiosResponse> {
+    public async call(method: string, params?: any): Promise<AxiosResponse<IZabbixResponse>> {
         const id = Math.random()
             .toString()
             .substr(3);
@@ -31,6 +32,6 @@ export class ZabbixSocket {
             auth: this.token,
         };
 
-        return await this.http.post('', data);
+        return await this.http.post<IZabbixResponse>('', data);
     }
 }
