@@ -1,7 +1,7 @@
 {
     "name": "zabbix-client",
     "version": "1.0.0",
-    "description": "Zabbix Javascript Rest API Client",
+    "description": "Zabbix Javascript API Client",
     "main": "dist/index",
     "scripts": {
         "build": "rimraf dist && tsc",
