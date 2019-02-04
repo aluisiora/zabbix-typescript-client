@@ -4,7 +4,7 @@ import { IZabbixResponse } from './IZabbixResponse';
 export class ZabbixSocket {
     private http: AxiosInstance;
 
-    private token: string;
+    private token: string = null;
 
     constructor(url: string) {
         this.http = axios.create({
@@ -15,8 +15,9 @@ export class ZabbixSocket {
         });
     }
 
-    public setToken(token: string): void {
+    public setToken(token: string): string {
         this.token = token;
+        return this.token;
     }
 
     public async call(method: string, params?: any): Promise<AxiosResponse<IZabbixResponse>> {

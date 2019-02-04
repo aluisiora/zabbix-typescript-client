@@ -4,9 +4,10 @@
     "description": "Zabbix Javascript Rest API Client",
     "main": "dist/index",
     "scripts": {
-        "test": "jest",
         "build": "rimraf dist && tsc",
-        "watch": "rimraf dist && tsc -w"
+        "watch": "rimraf dist && tsc -w",
+        "test": "NODE_ENV=testing jest",
+        "test:cov": "NODE_ENV=testing jest --coverage"
     },
     "repository": {
         "type": "git",
@@ -23,10 +24,27 @@
         "axios": "^0.18.0"
     },
     "devDependencies": {
-        "jest": "^24.0.0",
+        "@types/express": "^4.16.1",
+        "@types/jest": "^23.3.13",
+        "body-parser": "^1.18.3",
+        "express": "^4.16.4",
         "rimraf": "^2.6.3",
+        "jest": ">=22.0.0 <24.0.0",
         "ts-jest": "^23.10.5",
         "tslint": "^5.12.1",
         "typescript": "^3.3.1"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "src",
+        "testRegex": ".spec.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "coverageDirectory": "../coverage"
     }
 }
