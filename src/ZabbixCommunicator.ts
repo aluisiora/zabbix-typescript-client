@@ -1,17 +1,18 @@
-import { ZabbixSocket } from 'ZabbixSocket';
+import { ZabbixSocket } from './ZabbixSocket';
 import { ZabbixResponseException } from './ZabbixResponseException';
 
-export abstract class ZabbixCommunicator {
+export class ZabbixCommunicator {
     private socket: ZabbixSocket;
 
-    protected method: string = '';
+    protected method: string;
 
-    constructor(socket: ZabbixSocket) {
+    constructor(socket: ZabbixSocket, method: string) {
         this.socket = socket;
+        this.method = method;
     }
 
-    protected async call(method: string, params?: any): Promise<any> {
-        const response = await this.socket.call(this.method + method, params);
+    public async call(params?: any): Promise<any> {
+        const response = await this.socket.call(this.method, params);
 
         if (response.data.error) {
             throw new ZabbixResponseException(response.data.error);

@@ -11,7 +11,7 @@ export class ZabbixClient {
     public async login(username: string, password: string): Promise<ZabbixAPI> {
         const socket = new ZabbixSocket(this.url);
         const api = new ZabbixAPI(socket);
-        const token = await api.user().login(username, password);
+        const token = await api.login(username, password);
         socket.setToken(token);
         return Promise.resolve(api);
     }
