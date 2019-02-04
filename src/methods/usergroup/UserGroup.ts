@@ -4,8 +4,6 @@ import { IUserGroupCreateParams } from './IUserGroupCreateParams';
 import { IUserGroupResponse } from './IUserGroupResponse';
 import { IUserGroup } from './IUserGroup';
 import { IUserGroupGetParams } from './IUserGroupGetParams';
-import { IUserGroupMassAddParams } from './IUserGroupMassAddParams';
-import { IUserGroupMassUpdateParams } from './IUserGroupMassUpdateParams';
 import { IUserGroupUpdateParams } from './IUserGroupUpdateParams';
 
 export class Trigger extends ZabbixCommunicator {
@@ -28,13 +26,5 @@ export class Trigger extends ZabbixCommunicator {
 
     public async delete(params: string[] | number[]): Promise<IUserGroupResponse> {
         return await this.call('delete', params);
-    }
-
-    public async massadd(params: IUserGroupMassAddParams): Promise<IUserGroupResponse> {
-        return await this.call('massadd', params);
-    }
-
-    public async massupdate(params: IUserGroupMassUpdateParams): Promise<IUserGroupResponse> {
-        return await this.call('massupdate', params);
     }
 }

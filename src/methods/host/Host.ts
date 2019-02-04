@@ -4,9 +4,6 @@ import { IHostGetParams } from './IHostGetParams';
 import { IHostCreateParams } from './IHostCreateParams';
 import { IHostResponse } from './IHostResponse';
 import { IHostUpdateParams } from './IHostUpdateParams';
-import { IHostMassAddParams } from './IHostMassAddParams';
-import { IHostMassUpdateParams } from './IHostMassUpdateParams';
-import { IHostMassRemoveParams } from './IHostMassRemoveParams';
 import { ZabbixSocket } from '../../ZabbixSocket';
 
 export class Host extends ZabbixCommunicator {
@@ -29,17 +26,5 @@ export class Host extends ZabbixCommunicator {
 
     public async delete(params: string[] | number[]): Promise<IHostResponse> {
         return await this.call('delete', params);
-    }
-
-    public async massadd(params: IHostMassAddParams): Promise<IHostResponse> {
-        return await this.call('massadd', params);
-    }
-
-    public async massupdate(params: IHostMassUpdateParams): Promise<IHostResponse> {
-        return await this.call('massupdate', params);
-    }
-
-    public async massremove(params: IHostMassRemoveParams): Promise<IHostResponse> {
-        return await this.call('massremove', params);
     }
 }

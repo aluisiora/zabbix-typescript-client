@@ -4,9 +4,6 @@ import { IHostGroupCreateParams } from './IHostGroupCreateParams';
 import { IHostGroupResponse } from './IHostGroupResponse';
 import { IHostGroup } from './IHostGroup';
 import { IHostGroupGetParams } from './IHostGroupGetParams';
-import { IHostGroupMassaddParams } from './IHostGroupMassaddParams';
-import { IHostGroupMassremoveParams } from './IHostGroupMassremoveParams';
-import { IHostGroupMassupdateParams } from './IHostGroupMassupdateParams';
 import { IHostGroupUpdateParams } from './IHostGroupUpdateParams';
 
 export class HostGroup extends ZabbixCommunicator {
@@ -37,17 +34,5 @@ export class HostGroup extends ZabbixCommunicator {
 
     public async iswritable(params: string[] | number[]): Promise<IHostGroupResponse> {
         return await this.call('iswritable', params);
-    }
-
-    public async massadd(params: IHostGroupMassaddParams): Promise<IHostGroupResponse> {
-        return await this.call('massadd', params);
-    }
-
-    public async massupdate(params: IHostGroupMassupdateParams): Promise<IHostGroupResponse> {
-        return await this.call('massupdate', params);
-    }
-
-    public async massremove(params: IHostGroupMassremoveParams): Promise<IHostGroupResponse> {
-        return await this.call('massremove', params);
     }
 }
