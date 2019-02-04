@@ -87,7 +87,7 @@ const hosts = await api.method("host.create").call({
 console.log(hosts); // { hostids: ["107819"] }
 ```
 
-In case of an error during the call, an instance of `ZabbixResponseException` will be throw, so if you are using async/await, you can catch it like this:
+In case of an error during the call, an instance of `ZabbixResponseException` will be thrown, so if you are using async/await, you can catch it like this:
 
 ```javascript
 try {
@@ -104,6 +104,20 @@ try {
     err instanceof ZabbixResponseException; // true
     console.log(err.message); // Login name or password is incorrect.
 }
+```
+
+Or else, just do a then/catch:
+
+```javascript
+api.method("thismethod.doesnotexist")
+    .call()
+    .then(result => {
+        // the result, but this will fail
+    })
+    .catch(err => {
+        err instanceof ZabbixResponseException; // true
+        console.log(err.message); // Incorrect method "thismethod.doesnotexist"
+    });
 ```
 
 ## Note
