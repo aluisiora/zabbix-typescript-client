@@ -20,7 +20,7 @@ export class ZabbixSocket {
         return this.token;
     }
 
-    public async call(method: string, params?: any): Promise<AxiosResponse<IZabbixResponse>> {
+    public async call(method: string, params?: any, noAuth: boolean = false): Promise<AxiosResponse<IZabbixResponse>> {
         const id = Math.random()
             .toString()
             .substr(3);
@@ -32,6 +32,8 @@ export class ZabbixSocket {
             id,
             auth: this.token,
         };
+
+        if (noAuth) data.auth = null;
 
         return await this.http.post<IZabbixResponse>('', data);
     }
