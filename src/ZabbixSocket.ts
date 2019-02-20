@@ -12,6 +12,19 @@ export class ZabbixSocket {
             headers: {
                 Accept: 'application/json',
             },
+            timeout: 40000,
+            // @ts-ignore
+            retries: 0,
+        });
+
+        // Retry timeout
+        this.http.interceptors.response.use(null, error => {
+            if (error.code === 'ECONNABORTED' && error.config && error.config.retries < 3) {
+                error.config.retries++;
+                return this.http.request(error.config);
+            }
+
+            return Promise.reject(error);
         });
     }
 
