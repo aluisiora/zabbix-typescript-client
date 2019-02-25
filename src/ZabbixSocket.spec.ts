@@ -15,6 +15,14 @@ describe('ZabbixSocket', () => {
             expect(data.baseURL).toBe(url);
             expect(data.headers).toHaveProperty('Accept', 'application/json');
             return {
+                interceptors: {
+                    response: {
+                        use: (param1, param2) => {
+                            expect(param1).toBe(null);
+                            expect(typeof param2).toBe('function');
+                        },
+                    },
+                },
                 post: async (path: string, zparams?: any): Promise<boolean> => {
                     expect(path).toBe('');
                     expect(zparams).toHaveProperty('jsonrpc', '2.0');
@@ -42,6 +50,14 @@ describe('ZabbixSocket', () => {
             expect(data.baseURL).toBe(url);
             expect(data.headers).toHaveProperty('Accept', 'application/json');
             return {
+                interceptors: {
+                    response: {
+                        use: (param1, param2) => {
+                            expect(param1).toBe(null);
+                            expect(typeof param2).toBe('function');
+                        },
+                    },
+                },
                 post: async (path: string, zparams?: any): Promise<boolean> => {
                     expect(path).toBe('');
                     expect(zparams).toHaveProperty('jsonrpc', '2.0');
