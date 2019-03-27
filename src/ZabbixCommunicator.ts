@@ -21,7 +21,7 @@ export class ZabbixCommunicator {
         const response = await this.socket.call(this.method, params);
 
         if (response.data.error) {
-            throw new ZabbixResponseException(response.data.error);
+            throw new ZabbixResponseException(response.data.error, response.config);
         }
 
         return response.data.result;

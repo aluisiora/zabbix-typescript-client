@@ -1,5 +1,6 @@
 import { ZabbixSocket } from './ZabbixSocket';
 import { ZabbixCommunicator } from './ZabbixCommunicator';
+import { AxiosInstance } from 'axios';
 
 /**
  * The API link which can login, logout and set a method to use
@@ -7,8 +8,22 @@ import { ZabbixCommunicator } from './ZabbixCommunicator';
 export class ZabbixAPI {
     private socket: ZabbixSocket;
 
+    private reloginInterceptor: number;
+
     constructor(socket: ZabbixSocket) {
         this.socket = socket;
+    }
+
+    public getHttpSocket(): AxiosInstance {
+        return this.socket.getHttp();
+    }
+
+    public getSocket(): ZabbixSocket {
+        return this.socket;
+    }
+
+    public setReloginInterceptor(interceptor: number) {
+        this.reloginInterceptor = interceptor;
     }
 
     /**
@@ -28,8 +43,11 @@ export class ZabbixAPI {
      * without logging again
      */
     public async logout() {
-        const result = await this.method('user.logout').call();
+        const result = await this.method('user.logout').call([]);
         this.socket.setToken(null);
+        if (this.reloginInterceptor) {
+            this.getHttpSocket().interceptors.request.eject(this.reloginInterceptor);
+        }
         return result;
     }
 

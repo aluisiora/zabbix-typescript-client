@@ -28,6 +28,14 @@ export class ZabbixSocket {
         });
     }
 
+    public getHttp(): AxiosInstance {
+        return this.http;
+    }
+
+    public getToken(): string {
+        return this.token;
+    }
+
     public setToken(token: string): string {
         this.token = token;
         return this.token;
