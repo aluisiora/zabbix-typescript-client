@@ -23,7 +23,7 @@
     "author": "Aluisio R. Amaral",
     "license": "MIT",
     "dependencies": {
-        "axios": "^0.19.0"
+        "axios": "*"
     },
     "devDependencies": {
         "@types/cors": "^2.8.5",
