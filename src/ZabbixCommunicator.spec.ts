@@ -25,7 +25,7 @@ describe('ZabbixCommunicator', () => {
 
         const res = await comm.call(params);
 
-        expect(call).toBeCalledWith(method, params);
+        expect(call).toBeCalledWith(method, params, undefined);
         expect(res).toBe(response.data.result);
     });
 
@@ -45,6 +45,6 @@ describe('ZabbixCommunicator', () => {
 
         await expect(comm.call()).rejects.toThrow(ZabbixResponseException);
 
-        expect(call).toBeCalledWith(method, undefined);
+        expect(call).toBeCalledWith(method, undefined, undefined);
     });
 });
