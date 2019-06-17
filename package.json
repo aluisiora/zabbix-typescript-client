@@ -1,12 +1,12 @@
 {
     "name": "zabbix-client",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "Zabbix Javascript API Client",
     "main": "dist/index",
     "scripts": {
         "build": "rimraf dist && tsc",
         "watch": "rimraf dist && tsc -w",
-        "prepublishOnly": "rimraf dist && tsc",
+        "prepublishOnly": "npm test && rimraf dist && tsc",
         "test": "NODE_ENV=testing jest",
         "test:cov": "NODE_ENV=testing jest --coverage",
         "test:e2e": "NODE_ENV=testing jest --config ./test/jest-e2e.json"
@@ -49,6 +49,18 @@
         "transform": {
             "^.+\\.(t|j)s$": "ts-jest"
         },
-        "coverageDirectory": "../coverage"
+        "coverageDirectory": "../coverage",
+        "globals": {
+            "ts-jest": {
+                "diagnostics": {
+                    "ignoreCodes": [
+                        2345,
+                        6059,
+                        18002,
+                        18003
+                    ]
+                }
+            }
+        }
     }
 }

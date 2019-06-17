@@ -8,7 +8,7 @@ describe('ZabbixCommunicator', () => {
     });
 
     it('should call through the socket with params without error', async () => {
-        const response = {
+        const response: any = {
             data: {
                 result: 'ok',
             },
@@ -30,7 +30,7 @@ describe('ZabbixCommunicator', () => {
     });
 
     it('should call through the socket with error', async () => {
-        const errorResponse = {
+        const errorResponse: any = {
             data: {
                 error: 'yeah, got an error alright',
             },
