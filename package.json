@@ -1,6 +1,6 @@
 {
     "name": "zabbix-client",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "description": "Zabbix Javascript API Client",
     "main": "dist/index",
     "scripts": {
