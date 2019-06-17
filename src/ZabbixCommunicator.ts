@@ -17,11 +17,11 @@ export class ZabbixCommunicator {
      *
      * @param params
      */
-    public async call<T>(params?: any): Promise<T> {
+    public async call<T>(params?: any, noAuth?: boolean): Promise<T> {
         let response: any = {};
 
         try {
-            response = await this.socket.call(this.method, params);
+            response = await this.socket.call(this.method, params, noAuth);
 
             if (response.data && response.data.error) {
                 throw new ZabbixResponseException(response.data.error, response.config);
