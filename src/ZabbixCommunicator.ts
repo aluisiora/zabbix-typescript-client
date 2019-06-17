@@ -18,12 +18,18 @@ export class ZabbixCommunicator {
      * @param params
      */
     public async call<T>(params?: any): Promise<T> {
-        const response = await this.socket.call(this.method, params);
+        let response: any = {};
 
-        if (response.data.error) {
-            throw new ZabbixResponseException(response.data.error, response.config);
+        try {
+            response = await this.socket.call(this.method, params);
+
+            if (response.data && response.data.error) {
+                throw new ZabbixResponseException(response.data.error, response.config);
+            }
+
+            return response.data.result;
+        } catch (error) {
+            throw new ZabbixResponseException(error.message, response.config);
         }
-
-        return response.data.result;
     }
 }
