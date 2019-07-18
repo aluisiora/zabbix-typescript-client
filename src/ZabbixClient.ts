@@ -1,12 +1,9 @@
 import { ZabbixAPI } from './ZabbixAPI';
 import { ZabbixSocket } from './ZabbixSocket';
+import { ZabbixResponseException } from './ZabbixResponseException';
 
 export class ZabbixClient {
     private url: string;
-
-    private reloginTries: number = 0;
-
-    private isReloging: boolean = false;
 
     constructor(url: string) {
         this.url = url;
@@ -33,37 +30,23 @@ export class ZabbixClient {
             async response => {
                 if (response.data && response.data.error) {
                     const error = response.data.error;
-                    if (
-                        error.data.toLowerCase().includes('re-login') ||
-                        error.data.toLowerCase().includes('not authorised')
-                    ) {
-                        if (this.isReloging) {
-                            await new Promise(resolve => setTimeout(resolve, 3000));
-                        } else {
-                            this.reloginTries++;
-                            this.isReloging = true;
+                    if (error.data.toLowerCase().includes('re-login')) {
+                        try {
+                            const client = new ZabbixClient(this.url);
+                            const newApi = await client.login(username, password);
+                            api.getSocket().setToken(newApi.getSocket().getToken());
 
-                            if (this.reloginTries > 3) {
-                                if (this.reloginTries > 60) this.reloginTries = 60;
-                                await new Promise(resolve => setTimeout(resolve, 1000 * this.reloginTries));
-                            }
+                            const data = JSON.parse(response.config.data);
+                            data.auth = api.getSocket().getToken();
+                            response.config.data = JSON.stringify(data);
 
-                            try {
-                                const token = await api.login(username, password);
-                                api.getSocket().setToken(token);
-                                this.isReloging = false;
-                            } catch (error) {}
+                            return http.request(response.config);
+                        } catch (error) {
+                            throw new ZabbixResponseException(error.message, response.config);
                         }
-
-                        const data = JSON.parse(response.config.data);
-                        data.auth = api.getSocket().getToken();
-                        response.config.data = JSON.stringify(data);
-
-                        return http.request(response.config);
                     }
                 }
 
-                this.reloginTries = 0;
                 return response;
             },
             error => error,
