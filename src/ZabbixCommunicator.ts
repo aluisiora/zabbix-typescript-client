@@ -22,14 +22,14 @@ export class ZabbixCommunicator {
 
         try {
             response = await this.socket.call(this.method, params, noAuth);
-
-            if (response.data && response.data.error) {
-                throw new ZabbixResponseException(response.data.error, response.config);
-            }
-
-            return response.data.result;
         } catch (error) {
             throw new ZabbixResponseException(error.message, response.config);
         }
+
+        if (response.data && response.data.error) {
+            throw new ZabbixResponseException(response.data.error, response.config);
+        }
+
+        return response.data.result;
     }
 }
