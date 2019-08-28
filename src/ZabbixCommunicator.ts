@@ -26,6 +26,14 @@ export class ZabbixCommunicator {
             throw new ZabbixResponseException(error.message, response.config);
         }
 
+        if (!response.data) {
+            throw new ZabbixResponseException({
+                data: response.statusText,
+                message: response.statusText,
+                code: response.status
+            }, response.config);
+        }
+
         if (response.data && response.data.error) {
             throw new ZabbixResponseException(response.data.error, response.config);
         }
